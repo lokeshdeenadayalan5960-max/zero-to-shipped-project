@@ -1,0 +1,27 @@
+
+> zero-to-shipped-resume-parser@0.1.0 dev
+> vite --port 5173 --strictPort
+
+
+  VITE v6.4.4  ready in 517 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+10:03:20 pm [vite] (client) page reload index.html
+10:03:20 pm [vite] (client) page reload index.html
+10:03:21 pm [vite] (client) page reload index.html
+10:03:21 pm [vite] (client) page reload index.html
+10:03:21 pm [vite] (client) page reload index.html
+10:03:21 pm [vite] (client) page reload index.html
+10:03:22 pm [vite] (client) page reload index.html
+10:03:23 pm [vite] (client) page reload index.html
+10:03:24 pm [vite] (client) page reload index.html
+10:03:24 pm [vite] (client) page reload index.html
+10:03:24 pm [vite] (client) page reload index.html
+10:03:25 pm [vite] (client) page reload index.html
+10:03:25 pm [vite] (client) page reload index.html
+10:03:26 pm [vite] (client) page reload index.html
+10:03:27 pm [vite] (client) page reload index.html
+10:06:02 pm [vite] (client) page reload index.html
+10:06:24 pm [vite] (client) page reload index.html
+10:07:31 pm [vite] (client) page reload index.html

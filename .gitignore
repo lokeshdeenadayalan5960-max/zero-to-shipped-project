@@ -1,0 +1,13 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+dist-ssr
+
+# Logs & local env
+*.local
+npm-debug.log*
+
+# OS files
+.DS_Store
