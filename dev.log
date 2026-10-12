@@ -25,3 +25,11 @@
 10:06:02 pm [vite] (client) page reload index.html
 10:06:24 pm [vite] (client) page reload index.html
 10:07:31 pm [vite] (client) page reload index.html
+10:50:15 pm [vite] (client) page reload vanilla/index.html
+7:20:50 pm [vite] (client) page reload index.html
+8:08:24 pm [vite] (client) page reload frontend/index.html
+8:08:24 pm [vite] (client) page reload index.html
+8:08:24 pm [vite] vite.config.js changed, restarting server...
+8:08:24 pm [vite] (client) Re-optimizing dependencies because vite config has changed
+8:08:24 pm [vite] server restarted.
+8:11:43 pm [vite] (client) page reload frontend/dist/index.html

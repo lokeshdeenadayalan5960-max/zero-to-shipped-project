@@ -1,0 +1,7 @@
+
+> zero-to-shipped-backend@0.1.0 start
+> node src/server.js
+
+MongoDB connected: resumeparser
+API ready at http://localhost:5000
+Warning: UnknownErrorException: Unable to load font data at: file:///C:/Users/DELL/Desktop/zero%20to%20shipped%20project/backend/node_modules/pdfjs-dist/standard_fonts/LiberationSans-Regular.ttf
