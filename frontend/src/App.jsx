@@ -10,6 +10,7 @@ import { extractTextFromPdf, scoreResume } from './lib/resume.js'
 // One screen, four states: no file → file picked → analyzing → report.
 export default function App() {
   const [file, setFile] = useState(null)
+  const [jd, setJd] = useState('')
   const [busy, setBusy] = useState(false)
   const [status, setStatus] = useState({ text: '', error: false })
   const [report, setReport] = useState(null)
@@ -41,14 +42,32 @@ export default function App() {
     setBusy(true)
     setReport(null)
     try {
-      setStatus({ text: 'Extracting text…', error: false })
-      const text = await extractTextFromPdf(file, (page, total) =>
-        setStatus({ text: `Reading page ${page} of ${total}…`, error: false }),
-      )
-      setStatus({ text: 'Matching skills…', error: false })
-      // Give the browser a tick to paint the status before the fast scan.
-      await new Promise((resolve) => setTimeout(resolve, 50))
-      setReport(scoreResume(text))
+      setStatus({ text: 'Analyzing with AI…', error: false })
+      
+      const formData = new FormData();
+      formData.append('resume', file);
+      formData.append('jd', jd);
+
+      // In production, we use the relative path /api/compare which Vercel routes.
+      // Locally, vercel dev handles the binding.
+      const response = await fetch('/api/compare', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to analyze resume');
+      }
+
+      const result = await response.json();
+      
+      // Adapt backend result to frontend report format
+      setReport({
+        score: parseFloat(result.matchScore),
+        summary: result.message,
+        details: result.parsedResume
+      });
+      
       setStatus({ text: '', error: false })
     } catch (err) {
       setStatus({
@@ -77,10 +96,12 @@ export default function App() {
         <Uploader
           ref={uploaderRef}
           file={file}
+          jd={jd}
           busy={busy}
           status={status}
           onPick={handleFile}
           onRemove={clearFile}
+          onJDChange={setJd}
           onAnalyze={analyze}
         />
         {report && <Results report={report} onReset={reset} />}

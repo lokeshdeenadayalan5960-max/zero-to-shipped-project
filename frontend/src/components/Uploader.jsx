@@ -4,12 +4,13 @@ import { forwardRef, useId, useRef, useState } from 'react'
 // the file itself lives in App (single source of truth); this component only
 // reports events upward.
 const Uploader = forwardRef(function Uploader(
-  { file, busy, status, onPick, onRemove, onAnalyze },
+  { file, jd, busy, status, onPick, onRemove, onJDChange, onAnalyze },
   ref,
 ) {
   const inputRef = useRef(null)
   const [dragging, setDragging] = useState(false)
   const inputId = useId()
+  const jdId = useId()
 
   function handleDrop(e) {
     e.preventDefault()
@@ -81,6 +82,18 @@ const Uploader = forwardRef(function Uploader(
             </button>
           </div>
         )}
+
+        <div className="jd-section">
+          <label htmlFor={jdId}>Job Description</label>
+          <textarea
+            id={jdId}
+            className="jd-input"
+            placeholder="Paste the job description here..."
+            value={jd}
+            onChange={(e) => onJDChange(e.target.value)}
+            rows={6}
+          />
+        </div>
 
         <div className="actions">
           <button
