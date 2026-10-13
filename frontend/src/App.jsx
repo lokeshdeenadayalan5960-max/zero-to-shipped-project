@@ -46,33 +46,32 @@ export default function App() {
       
       const formData = new FormData();
       formData.append('resume', file);
-      formData.append('jd', jd);
+      formData.append('jobDescription', jd); // Matches backend req.body.jobDescription
 
-      // In production, we use the relative path /api/compare which Vercel routes.
-      // Locally, vercel dev handles the binding.
-      const response = await fetch('/api/compare', {
+      const backendUrl = 'https://zero-to-shipped-project-eer8.vercel.app';
+      const response = await fetch(`${backendUrl}/api/analyze`, {
         method: 'POST',
         body: formData,
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to analyze resume');
-      }
-
       const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to analyze resume');
+      }
       
-      // Adapt backend result to frontend report format
+      // Adapt backend response to frontend report format
       setReport({
-        score: parseFloat(result.matchScore),
-        summary: result.message,
-        details: result.parsedResume
+        score: result.score,
+        summary: result.band?.label || 'Analysis Complete',
+        details: result
       });
       
       setStatus({ text: '', error: false })
     } catch (err) {
       setStatus({
         text:
-          err.userMessage ||
+          err.message ||
           'Something went wrong while reading that PDF. Is it a valid file?',
         error: true,
       })
