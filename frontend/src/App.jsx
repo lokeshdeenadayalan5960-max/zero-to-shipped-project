@@ -54,7 +54,13 @@ export default function App() {
         body: formData,
       });
 
-      const result = await response.json();
+      const responseText = await response.text();
+      let result;
+      try {
+        result = JSON.parse(responseText);
+      } catch (parseErr) {
+        throw new Error(`Server returned status ${response.status} (Not JSON). Check backend routing.`);
+      }
 
       if (!response.ok) {
         throw new Error(result.error || 'Failed to analyze resume');
